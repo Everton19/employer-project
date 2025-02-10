@@ -1,5 +1,44 @@
-<div class="bg-gray-100 p-4">
-  TESTE tailwindcss
-</div>
+<div class="mx-auto max-w-[1080px] my-5">
+  <mat-stepper linear #stepper>
+    @for (item of stepsList; track $index) {
+      <mat-step>
+        <ng-template matStepLabel>{{item.stepName}}</ng-template>
+        <form>
+          <div *ngIf="item.stepName === stepsList[0].stepName" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <mat-form-field class="w-full">
+              <mat-label>
+                Name
+                <input matInput required>
+              </mat-label>
+            </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>
+                Email
+                <input matInput required>
+              </mat-label>
+            </mat-form-field>
+            <mat-form-field class="col-span-1 md:col-span-2">
+              <mat-label>
+                Password
+                <input matInput required>
+              </mat-label>
+            </mat-form-field>
+            <div class="col-span-1 md:col-span-2 flex justify-end">
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+    }
 
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
 <router-outlet />
